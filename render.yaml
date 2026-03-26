@@ -1,0 +1,30 @@
+services:
+  # MongoDB API Backend
+  - type: web
+    name: insurematrix-api
+    runtime: node
+    rootDir: ui
+    buildCommand: npm install
+    startCommand: node mongo-api.cjs
+    envVars:
+      - key: VITE_MONGO_URI
+        value: mongodb+srv://prathmeshmahakal35_db_user:qeEZjJ9Hsmq0WB9V@clusteraimatrix1.veynb2f.mongodb.net/?appName=ClusterAIMatrix1
+      - key: VITE_MONGO_DB
+        value: instest
+      - key: VITE_MONGO_COLL
+        value: results
+      - key: PORT
+        generateValue: true
+    healthCheckPath: /mongo-api/health
+
+  # Dashboard UI (Static Site)
+  - type: web
+    name: insurematrix-ui
+    runtime: static
+    rootDir: ui
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
