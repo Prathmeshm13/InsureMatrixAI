@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-950 text-gray-100 font-sans antialiased;
+    margin: 0;
+  }
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-gray-900 border border-gray-800 rounded-xl p-6;
+  }
+  .card-sm {
+    @apply bg-gray-900 border border-gray-800 rounded-lg p-4;
+  }
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-gray-700 hover:bg-gray-600 text-gray-100 font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+  .btn-danger {
+    @apply bg-red-600/20 hover:bg-red-600/30 text-red-400 font-medium py-2 px-4 rounded-lg transition-colors border border-red-600/30;
+  }
+  .input {
+    @apply bg-gray-800 border border-gray-700 text-gray-100 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .tab-btn {
+    @apply px-4 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer;
+  }
+  .tab-btn-active {
+    @apply bg-blue-600 text-white;
+  }
+  .tab-btn-inactive {
+    @apply text-gray-400 hover:text-gray-200 hover:bg-gray-800;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #030712; }
+::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+
+/* Recharts */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: #111827 !important;
+  border: 1px solid #374151 !important;
+  border-radius: 8px !important;
+  color: #f9fafb !important;
+}
+.recharts-text { fill: #9ca3af !important; }
+.recharts-cartesian-axis-tick-value { fill: #9ca3af !important; }
+
+/* end */
