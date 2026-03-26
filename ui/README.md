@@ -1,33 +1,35 @@
-# InsureMatrix AI - Production Dashboard
+# InsureMatrix AI - FREE Vercel Deployment
 
 Production-ready React dashboard for InsureMatrixAI agent monitoring with MongoDB backend.
 
-## Quick Start
+## Quick Deploy (FREE)
 
-### Local Development
+### Option 1: Automated Script
 ```bash
-npm install
-npm run dev          # Frontend only
-npm start           # Backend API only
+.\vercel-deploy.bat
 ```
 
-### Production Build
+### Option 2: Manual Steps
 ```bash
-npm run build
+npm install -g vercel
+vercel login
+vercel --prod
 ```
 
-### Deploy to Render
-1. Push code to GitHub
-2. Go to render.com/dashboard
-3. New Blueprint → Connect your repo
-4. Render will auto-deploy both services from render.yaml
+## Features
+- ✅ **100% FREE** hosting on Vercel
+- ✅ Serverless MongoDB API
+- ✅ React dashboard with real-time data
+- ✅ Automatic deployments on git push
 
-## Services
-- **Backend API**: Express server connected to MongoDB Atlas
-- **Frontend**: Static React app (Vite)
+## URLs After Deploy
+- **Dashboard**: `https://your-project.vercel.app`
+- **API**: `https://your-project.vercel.app/mongo-api/health`
 
-## Environment Variables
-See `.env.example` for required variables.
+## Environment
+- **Frontend**: Vercel static hosting
+- **Backend**: Vercel serverless functions
+- **Database**: MongoDB Atlas (free tier)
 
 ## Upload Data
 ```bash
@@ -35,8 +37,7 @@ npm run upload
 ```
 
 ## Stack
-- React 19 + TypeScript
-- Vite 8
-- TailwindCSS
+- React 19 + TypeScript + Vite
+- TailwindCSS + Radix UI
 - MongoDB Atlas
-- Express.js
+- Vercel (free tier)

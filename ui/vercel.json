@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/mongo-api/(.*)",
+      "dest": "/api/mongo-api.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "VITE_MONGO_URI": "mongodb+srv://prathmeshmahakal35_db_user:qeEZjJ9Hsmq0WB9V@clusteraimatrix1.veynb2f.mongodb.net/?appName=ClusterAIMatrix1",
+    "VITE_MONGO_DB": "instest",
+    "VITE_MONGO_COLL": "results"
+  }
+}
