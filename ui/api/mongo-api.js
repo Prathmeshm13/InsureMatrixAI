@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
 const MONGO_URI = process.env.VITE_MONGO_URI || '';
 const DB_NAME = process.env.VITE_MONGO_DB || 'instest';
@@ -26,15 +26,16 @@ export default async function handler(req, res) {
   }
 
   const { pathname } = new URL(req.url, `http://${req.headers.host}`);
+  const cleanPath = '/mongo-api' + pathname;
 
   try {
-    if (pathname === '/api/mongo-api/health') {
+    if (cleanPath === '/mongo-api/health') {
       await getDb();
       res.status(200).json({ ok: true, db: DB_NAME, collection: COLL_NAME });
       return;
     }
 
-    if (pathname === '/api/mongo-api/results') {
+    if (cleanPath === '/mongo-api/results') {
       const limit = Math.min(parseInt(req.query.limit) || 500, 2000);
       const skip = parseInt(req.query.skip) || 0;
 
@@ -49,7 +50,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    if (pathname === '/api/mongo-api/results/jsonl') {
+    if (cleanPath === '/mongo-api/results/jsonl') {
       const limit = Math.min(parseInt(req.query.limit) || 500, 2000);
       const skip = parseInt(req.query.skip) || 0;
 

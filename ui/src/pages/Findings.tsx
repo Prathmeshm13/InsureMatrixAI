@@ -150,6 +150,7 @@ export default function FindingsPage() {
   const [error, setError] = useState<string | null>(null);
   const [filterSeverity, setFilterSeverity] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
+  const [filterText, setFilterText] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -186,8 +187,13 @@ export default function FindingsPage() {
   const filtered = useMemo(() => entries.filter(e => {
     if (filterCategory && e.category !== filterCategory) return false;
     if (filterSeverity && !e.findings.some(f => f.severity === filterSeverity)) return false;
+    if (filterText) {
+      const search = filterText.toLowerCase();
+      const combined = `${e.question} ${e.response ?? ""} ${catLabel(e.category)}`.toLowerCase();
+      if (!combined.includes(search)) return false;
+    }
     return true;
-  }), [entries, filterCategory, filterSeverity]);
+  }), [entries, filterCategory, filterSeverity, filterText]);
 
   const totalFindings = useMemo(() => filtered.reduce((s, e) => s + e.findings.length, 0), [filtered]);
 
@@ -243,6 +249,13 @@ export default function FindingsPage() {
 
       {/* Filters */}
       <div className="px-8 py-3 border-b border-gray-800 flex items-center gap-3 flex-wrap">
+        <input
+          className="input py-1.5 text-sm bg-gray-900 min-w-[220px]"
+          type="text"
+          placeholder="Search question, response or category"
+          value={filterText}
+          onChange={e => setFilterText(e.target.value)}
+        />
         <select
           className="input py-1.5 text-sm bg-gray-900"
           value={filterCategory}
@@ -261,9 +274,9 @@ export default function FindingsPage() {
           {severities.map(s => <option key={s} value={s}>{s}</option>)}
         </select>
 
-        {(filterCategory || filterSeverity) && (
+        {(filterCategory || filterSeverity || filterText) && (
           <button
-            onClick={() => { setFilterCategory(""); setFilterSeverity(""); }}
+            onClick={() => { setFilterCategory(""); setFilterSeverity(""); setFilterText(""); }}
             className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
           >
             Clear filters
